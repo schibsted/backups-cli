@@ -1,15 +1,10 @@
 ---
-
-install:
-- echo "This is sparta!"
+language: ruby
 
 env:
   global:
-  - ARTIFACTORY_REPO=yum-local/spt-payment/infra
-  - GEM_NAME=backups-cli
-  - SPINNAKER_APP=payment-backups
+  - SOME_REPO=yum-local/data/common
 
 script:
 - echo "Date is $(date)"
-- echo "This is \$SPINNAKER_APP"
-- export|grep SPIN
+- echo "Hello $SOME_REPO: \$SOME_REPO"

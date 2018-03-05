@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = Backups::VERSION
   spec.description   = "This tool backups different data sources to S3."
   spec.summary       = "This tool backups different data sources to S3"
-  spec.authors       = ["jpedro"]
-  spec.email         = ["jpedro.barbosa@gmail.com"]
+  spec.authors       = ["Schibsted"]
+  spec.email         = ["spt@schibsted.com"]
   spec.homepage      = "https://github.com/schibsted/backups-cli"
   spec.license       = "MIT"
 
