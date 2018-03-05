@@ -1,0 +1,15 @@
+---
+
+install:
+- echo "This is sparta!"
+
+env:
+  global:
+  - ARTIFACTORY_REPO=yum-local/spt-payment/infra
+  - GEM_NAME=backups-cli
+  - SPINNAKER_APP=payment-backups
+
+script:
+- echo "Date is $(date)"
+- echo "This is \$SPINNAKER_APP"
+- export|grep SPIN

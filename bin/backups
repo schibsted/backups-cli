@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# Copyright 2016 Schibsted Products & Technology AS.
+# Licensed under the terms of the MIT license. See LICENSE in the project root.
+$:.push File.expand_path("../../lib", __FILE__)
+
+require "logger"
+require "backups"
+
+log_level = ENV.fetch("BACKUPS_LOG_LEVEL", "info").upcase
+DRY_RUN   = ENV.fetch("BACKUPS_DRY_RUN", "0") == "1"
+log_file  = ENV.fetch("BACKUPS_LOG_FILE", "/var/log/backups-cli.log")
+
+# Accept --debug or -x flags for stdout debug logging
+if ARGV.include? "--debug" or ARGV.include? "-x"
+  log_file = STDOUT
+  log_level = "DEBUG"
+  ARGV.delete("--debug")
+  ARGV.delete("-x")
+end
+
+$LOG_ACTIVE = 1
+$LOGGER = Logger.new(log_file)
+$LOGGER.level = Object.const_get("Logger::#{log_level}")
+# $LOGGER.progname = File.basename(__FILE__)
+$LOGGER.progname = "main"
+$LOGGER.formatter = proc do |type, time, name, message|
+  "[#{time}]  #{name}  #{type.ljust(6)}  #{message}\n"
+end
+
+$LOGGER.warn "Log level is #{log_level}"
+
+
+begin
+  Backups::Cli.start ARGV
+rescue => e
+  cmd = ARGV[0] || "undef"
+  db  = ARGV[1] || "undef"
+  msg = e.to_s.encode!("UTF-8", {undef: :replace})
+  Backups::Events.fire :error, {
+    error:   msg,
+    command: cmd,
+    db:      db,
+  }
+  $LOGGER.error "Error: #{msg}."
+
+  raise e
+end
