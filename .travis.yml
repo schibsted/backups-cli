@@ -8,3 +8,9 @@ env:
 script:
 - echo "Date is $(date)"
 - echo "And $SOME_REPO is \$SOME_REPO"
+
+deploy:
+  skip_cleanup: true
+  provider: rake
+  on:
+    tags: true
