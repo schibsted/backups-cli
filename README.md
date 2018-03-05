@@ -16,12 +16,10 @@ Commands:
   backups help [COMMAND]  # Describe available commands or one specific command
   backups install         # Sets up the crontab for all jobs
   backups ls              # Lists all the configured jobs
-  backups show [JOB]      # Shows the final merged config for a JOB or just all
-  backups start JOB       # Starts the backup JOB
+  backups show [JOB]      # Shows the merged config (for a JOB or them all)
+  backups start [JOB]     # Starts a backup JOB or all of them
+  backups verify JOB      # Restores and verifies a backup JOB
   backups version         # Show current version
-
-Options:
-  [--yes], [--no-yes]
 
 ```
 
