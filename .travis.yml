@@ -9,6 +9,10 @@ script:
 - echo "Date is $(date)"
 - echo "And $SOME_REPO is \$SOME_REPO"
 
+before_script:
+- mkdir -p .gem/
+- echo ":rubygems_api_key: $rubygems_api_key" >> .gem/credentials
+
 deploy:
   skip_cleanup: true
   provider: script
