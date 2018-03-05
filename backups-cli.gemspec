@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "This tool backups different data sources to S3"
   spec.authors       = ["jpedro"]
   spec.email         = ["jpedro.barbosa@gmail.com"]
-  spec.homepage      = "https://github.com/jpedro/backups-cli"
+  spec.homepage      = "https://github.com/schibsted/backups-cli"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split $/
