@@ -11,7 +11,10 @@ script:
 
 before_script:
 - mkdir -pv .gem/
-- /bin/echo ":rubygems_api_key: $rubygems_api_key" >> .gem/credentials
+- >
+  cat <<EOS > .gem/credentials
+  ":rubygems_api_key: $rubygems_api_key"
+  EOS
 
 deploy:
   skip_cleanup: true
