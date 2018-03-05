@@ -11,6 +11,7 @@ script:
 
 deploy:
   skip_cleanup: true
-  provider: rake
+  provider: script
+  script: rake release
   on:
     tags: true
