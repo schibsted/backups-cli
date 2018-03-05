@@ -7,4 +7,4 @@ env:
 
 script:
 - echo "Date is $(date)"
-- echo "Hello $SOME_REPO: \$SOME_REPO"
+- echo "And SOME_REPO is \$SOME_REPO"
