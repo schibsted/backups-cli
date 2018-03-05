@@ -1,6 +1,6 @@
 # backups-cli
 
-[![Build Status](https://travis.schibsted.io/spt-payment/backups-cli.svg?token=up4siHpqEe3uNvEPryNi&branch=master)](https://travis.schibsted.io/spt-payment/backups-cli)
+[![Build Status](https://travis-ci.org/schibsted/backups-cli.svg?branch=master)](https://travis-ci.org/schibsted/backups-cli)
 
 This tool backups different data sources to S3.
 
