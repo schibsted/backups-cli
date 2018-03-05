@@ -13,7 +13,7 @@ before_script:
 - mkdir -pv .gem/
 - >
   cat <<EOS > .gem/credentials
-  ":rubygems_api_key: $rubygems_api_key"
+  \n":rubygems_api_key: $rubygems_api_key"
   \nEOS
 
 deploy:
