@@ -4,7 +4,7 @@ module Backups
   module Adapter
     class Mysql < Base
 
-      include ::Backups::Util::Stats
+      include ::Backups::Stats::Mysql
 
       def run
         setup

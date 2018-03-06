@@ -6,7 +6,7 @@ module Backups
 
       VERIFY_PREFIX = "__verify__"
 
-      include ::Backups::Util::Stats
+      include ::Backups::Stats::Mysql
 
       def verify
         setup
