@@ -88,7 +88,7 @@ module Backups
       details = adapter.run()
 
       ### Test the verify step immediately after
-      details["verify"] = _verify(job, config)
+      # details["verify"] = _verify(job, config)
 
       details
     end
