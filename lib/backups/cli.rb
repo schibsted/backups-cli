@@ -28,9 +28,13 @@ module Backups
       end
     end
 
-    desc "verify JOB", "Restores and verifies a backup JOB"
-    def verify job
-      Runner.new.verify job
+    desc "verify [JOB]", "Restores and verifies a backup JOB or all of them"
+    def verify job = nil
+      if job
+        Runner.new.verify job
+      else
+        Runner.new.verify_all
+      end
     end
 
     desc "install", "Sets up the crontab for all jobs"

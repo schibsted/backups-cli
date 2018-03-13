@@ -19,6 +19,13 @@ module Backups
       end
     end
 
+    def verify_all
+      $LOGGER.info "Verifying all jobs sequentially"
+      $GLOBAL["jobs"].each do |name, config|
+        verify name
+      end
+    end
+
     def start job
       $LOGGER.progname = job
       $LOGGER.info "Started backup"
