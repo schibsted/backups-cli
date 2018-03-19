@@ -67,32 +67,54 @@ module Backups
       backups = $GLOBAL.fetch("backups", {})
       crontab = backups.fetch("crontab", {})
       header  = crontab.fetch("header", "")
-      run_all = crontab.fetch("run-all", false)
+      backup  = crontab.fetch("backup", {})
+      verify  = crontab.fetch("verify", {})
+
+      backup_all = backup.fetch("run-all", false)
+      verify_all = verify.fetch("run-all", false)
+
       content = "#{header}\n#{previous}" \
         if header and not previous.include? header
 
       content << start
       content << "# Generated at #{Time.now}\n"
-      if run_all
-        content << get_all_crontab() + "\n"
+
+      if backup_all
+        content << get_all_backup(backup) + "\n"
       else
         content << get_jobs_crontab() + "\n"
       end
+
+      if verify_all
+        content << get_all_verify(verify) + "\n"
+      end
+
       content << finish
     end
 
-    def get_all_crontab
-      backups = $GLOBAL.fetch("backups", {})
-      crontab = backups.fetch("crontab", {})
-      minute  = crontab.fetch("minute", 0)
+    def get_all_backup crontab
+      line     = "#{@base}/bin/backups start"
+      minute   = crontab.fetch("minute", 0)
       hour     = crontab.fetch("hour", "*")
       crontime = get_crontime(crontab)
+      prefix   = crontab.fetch("prefix", "")
+      postfix  = crontab.fetch("postfix", "")
 
-      line    = "#{@base}/bin/backups start"
-      prefix  = crontab.fetch("prefix", "")
-      postfix = crontab.fetch("postfix", "")
+      line = "#{prefix} #{line}"  if prefix
+      line = "#{line} #{postfix}" if postfix
 
-      line = "#{prefix} #{line}" if prefix
+      "#{crontime} #{line}"
+    end
+
+    def get_all_verify crontab
+      line     = "#{@base}/bin/backups verify"
+      minute   = crontab.fetch("minute", 0)
+      hour     = crontab.fetch("hour", "*")
+      crontime = get_crontime(crontab)
+      prefix   = crontab.fetch("prefix", "")
+      postfix  = crontab.fetch("postfix", "")
+
+      line = "#{prefix} #{line}"  if prefix
       line = "#{line} #{postfix}" if postfix
 
       "#{crontime} #{line}"
